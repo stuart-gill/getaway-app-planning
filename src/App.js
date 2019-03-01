@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Contact from './components/Contact';
+import Header from './components/Header';
+import ResultItem from './components/ResultItem';
+import ResultsList from './components/ResultsList';
+import SearchForm from './components/SearchForm';
+
 
 class App extends Component {
   render() {
@@ -8,17 +14,12 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
+          <Contact />
+          <Header />
+          <ResultItem/>
+          <ResultsList/>
+          <SearchForm/>
+
         </header>
       </div>
     );
