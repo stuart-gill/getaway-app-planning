@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { isContext } from 'vm';
 
 export default class SearchForm extends Component {
   
@@ -28,7 +29,7 @@ export default class SearchForm extends Component {
       method: 'GET',
     })
     .then(res => res.json())
-    .then(data => console.log(data));
+    .then(data => console.log(data.properties.periods));
   }
   
   render() {
