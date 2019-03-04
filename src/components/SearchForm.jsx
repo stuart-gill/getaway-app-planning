@@ -43,14 +43,11 @@ export default class SearchForm extends Component {
   determineSuitableCities(travelTime) {
     for (let i = 0; i < cityList.length; i++) {
       if (cityList[i].hours < travelTime) {
-        this.setState({ location: cityList[i].latlong });
-        console.log(`determine cities set state to ${i}`);
+        console.log(`determine cities set state to ${cityList[i].name}`);
+        return cityList[i].latlong;
       } else {
-        this.setState({ location: "" });
+        console.log("no locations are suitable");
       }
-      console.log(
-        `travel time is ${travelTime} determine cities ran time ${i}`
-      );
     }
   }
 
@@ -64,38 +61,30 @@ export default class SearchForm extends Component {
     fetch(url, {
       method: "GET"
     })
-      .then((res) => res.json())
-      .then((data) => this.setState({ weather: data.properties.periods }));
+      .then(res => res.json())
+      .then(data => this.setState({ weather: data.properties.periods }));
   }
 
   onSubmitHours(e) {
     e.preventDefault();
-    this.determineSuitableCities(this.state.travelTime);
-    //let location = "47.6062%2C-122.3321";
-
-    // const travelTime = this.state.travelTime;
-    // for (let i = 0; i < cityList.length; i++) {
-    //   if (cityList[i].hours < travelTime) {
-    //     this.setState({ location: cityList[i].latlong });
-    //   }
-    // }
-
-    const search = {
-      location: this.state.location
-    };
-    let url = `https://api.weather.gov/points/${search.location}/forecast`;
+    let location = this.determineSuitableCities(this.state.travelTime);
+    //can set location state here if desired
+    // const search = {
+    //   location: this.state.location
+    // };
+    let url = `https://api.weather.gov/points/${location}/forecast`;
     console.log(url);
 
     fetch(url, {
       method: "GET"
     })
-      .then((res) => res.json())
+      .then(res => res.json())
       // .then((data) => console.log(data.properties.periods));
-      .then((data) => this.setState({ weather: data.properties.periods }));
+      .then(data => this.setState({ weather: data.properties.periods }));
   }
 
   render() {
-    const weatherItems = this.state.weather.map((item) => (
+    const weatherItems = this.state.weather.map(item => (
       <div key={item.number}>
         <h3>{item.name}</h3>
         <p>{item.temperature}</p>
