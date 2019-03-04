@@ -27,18 +27,30 @@ export default class SearchForm extends Component {
     this.state = {
       location: "",
       travelTime: "",
-      weather: []
+      weather: [],
+      tick: 0
     };
 
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.onSubmitHours = this.onSubmitHours.bind(this);
     this.determineSuitableCities = this.determineSuitableCities.bind(this);
+
+    // setInterval(() => {
+    //   console.log(this.state.weather);
+    // }, 2000);
   }
 
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
+
+  // componentDidMount() {
+  //   setInterval(() => {
+  //     let newTick = (this.state.tick += 1);
+  //     this.setState({ tick: newTick });
+  //   }, 1000);
+  // }
 
   determineSuitableCities(travelTime) {
     let locArray = [];
@@ -71,34 +83,50 @@ export default class SearchForm extends Component {
     e.preventDefault();
     let locations = this.determineSuitableCities(this.state.travelTime);
     let tempArray = [];
+    let promises = [];
 
     for (let loc of locations) {
       let url = `https://api.weather.gov/points/${loc}/forecast`;
       console.log(url);
 
-      fetch(url, {
+      let promise = fetch(url, {
         method: "GET"
       })
         .then(res => res.json())
         // .then((data) => console.log(data.properties.periods));
         .then(data => tempArray.push(data.properties.periods));
+
+      promises.push(promise);
     }
-    this.setState({ weather: tempArray });
+
+    Promise.all(promises).then(() => {
+      this.setState({ weather: tempArray });
+    });
+    // setTimeout(() => {
+    // this.setState({ weather: tempArray });
+    // }, 1);
+    this.setState({ cats: true });
+    console.log(this.state.cats);
   }
 
   render() {
     console.log(this.state.weather);
-    const weatherItems = this.state.weather.map(item => (
-      <div key={item.number}>
-        <h3>{item.name}</h3>
-        <p>{item.temperature}</p>
-      </div>
-    ));
+    let weatherItems = [];
+    let thisWeatherItem;
+    for (let city of this.state.weather) {
+      thisWeatherItem = city.map(item => (
+        <div key={item.number}>
+          <h3>{item.name}</h3>
+          <p>{item.temperature}</p>
+        </div>
+      ));
+      weatherItems.push(thisWeatherItem);
+    }
 
     return (
       <div>
         <h1>New Search</h1>
-        <form onSubmit={this.onSubmit}>
+        {/* <form onSubmit={this.onSubmit}>
           <div>
             <label>Location in Lat and Long</label>
             <br />
@@ -111,7 +139,7 @@ export default class SearchForm extends Component {
           </div>
           <br />
           <button type="submit"> Submit </button>
-        </form>
+        </form> */}
 
         <form onSubmit={this.onSubmitHours}>
           <div>
@@ -127,6 +155,7 @@ export default class SearchForm extends Component {
           <br />
           <button type="submit"> Submit </button>
         </form>
+        <h2>{this.state.tick}</h2>
 
         {weatherItems}
       </div>
