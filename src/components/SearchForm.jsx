@@ -10,7 +10,7 @@ const cityList = [
   {
     id: 2,
     name: "Yakima",
-    hours: 2.2,
+    hours: 1.9,
     latlong: "46.6021%2C-120.5059"
   },
   {
@@ -41,14 +41,16 @@ export default class SearchForm extends Component {
   }
 
   determineSuitableCities(travelTime) {
+    let locArray = [];
     for (let i = 0; i < cityList.length; i++) {
       if (cityList[i].hours < travelTime) {
-        console.log(`determine cities set state to ${cityList[i].name}`);
-        return cityList[i].latlong;
+        console.log(`determine cities returns ${cityList[i].name}`);
+        locArray.push(cityList[i].latlong);
       } else {
-        console.log("no locations are suitable");
+        console.log("this loc is not suitable");
       }
     }
+    return locArray;
   }
 
   onSubmit(e) {
@@ -67,23 +69,25 @@ export default class SearchForm extends Component {
 
   onSubmitHours(e) {
     e.preventDefault();
-    let location = this.determineSuitableCities(this.state.travelTime);
-    //can set location state here if desired
-    // const search = {
-    //   location: this.state.location
-    // };
-    let url = `https://api.weather.gov/points/${location}/forecast`;
-    console.log(url);
+    let locations = this.determineSuitableCities(this.state.travelTime);
+    let tempArray = [];
 
-    fetch(url, {
-      method: "GET"
-    })
-      .then(res => res.json())
-      // .then((data) => console.log(data.properties.periods));
-      .then(data => this.setState({ weather: data.properties.periods }));
+    for (let loc of locations) {
+      let url = `https://api.weather.gov/points/${loc}/forecast`;
+      console.log(url);
+
+      fetch(url, {
+        method: "GET"
+      })
+        .then(res => res.json())
+        // .then((data) => console.log(data.properties.periods));
+        .then(data => tempArray.push(data.properties.periods));
+    }
+    this.setState({ weather: tempArray });
   }
 
   render() {
+    console.log(this.state.weather);
     const weatherItems = this.state.weather.map(item => (
       <div key={item.number}>
         <h3>{item.name}</h3>
