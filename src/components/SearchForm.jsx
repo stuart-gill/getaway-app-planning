@@ -5,19 +5,22 @@ const cityList = [
     id: 1,
     name: "Leavenworth",
     hours: 2.5,
-    latlong: "47.5962%2C-120.6615"
+    latlong: "47.5962%2C-120.6615",
+    lodging: "https://www.airbnb.com/a/Leavenworth--United-States"
   },
   {
     id: 2,
     name: "Yakima",
     hours: 1.9,
-    latlong: "46.6021%2C-120.5059"
+    latlong: "46.6021%2C-120.5059",
+    lodging: "https://www.airbnb.com/s/Yakima--WA"
   },
   {
     id: 3,
     name: "Tacoma",
     hours: 0.75,
-    latlong: "47.2529%2C-122.4443"
+    latlong: "47.2529%2C-122.4443",
+    lodging: "https://www.airbnb.com/a/Tacoma--United-States"
   }
 ];
 
@@ -26,7 +29,8 @@ export default class SearchForm extends Component {
     super(props);
     this.state = {
       travelTime: "",
-      weather: []
+      weather: [],
+      temperature: "75"
     };
 
     this.onChange = this.onChange.bind(this);
@@ -35,6 +39,10 @@ export default class SearchForm extends Component {
   }
 
   onChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
+  }
+
+  onChangeSlider(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
 
@@ -79,9 +87,6 @@ export default class SearchForm extends Component {
     Promise.all(promises).then(() => {
       this.setState({ weather: tempArray });
     });
-    // setTimeout(() => {
-    // this.setState({ weather: tempArray });
-    // }, 1);
     this.setState({ cats: true });
     console.log(this.state.cats);
   }
@@ -121,22 +126,22 @@ export default class SearchForm extends Component {
     return (
       <div>
         <h1>New Search</h1>
-        {/* <form onSubmit={this.onSubmit}>
-          <div>
-            <label>Location in Lat and Long</label>
-            <br />
-            <input
-              type="text"
-              name="location"
-              onChange={this.onChange}
-              value={this.state.location}
-            />
-          </div>
-          <br />
-          <button type="submit"> Submit </button>
-        </form> */}
 
         <form onSubmit={this.onSubmitHours}>
+          <div>
+            <label>Temperature</label>
+            <input
+              type="range"
+              id="temperatureSlider"
+              min="20"
+              defaultValue="75"
+              max="100"
+              step="2"
+              name="temperature"
+              onChange={this.onChange}
+            />
+            <h2 id="showTemp">{this.state.temperature}</h2>
+          </div>
           <div>
             <label>Hours willing to travel</label>
             <br />
