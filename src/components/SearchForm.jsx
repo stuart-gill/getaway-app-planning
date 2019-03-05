@@ -32,7 +32,6 @@ export default class SearchForm extends Component {
     };
 
     this.onChange = this.onChange.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
     this.onSubmitHours = this.onSubmitHours.bind(this);
     this.determineSuitableCities = this.determineSuitableCities.bind(this);
 
@@ -57,26 +56,12 @@ export default class SearchForm extends Component {
     for (let i = 0; i < cityList.length; i++) {
       if (cityList[i].hours < travelTime) {
         console.log(`determine cities returns ${cityList[i].name}`);
-        locArray.push(cityList[i].latlong);
+        locArray.push({latlong: cityList[i].latlong, name: cityList[i].name});
       } else {
         console.log("this loc is not suitable");
       }
     }
     return locArray;
-  }
-
-  onSubmit(e) {
-    e.preventDefault();
-    const search = {
-      location: this.state.location
-    };
-    let url = `https://api.weather.gov/points/${search.location}/forecast`;
-
-    fetch(url, {
-      method: "GET"
-    })
-      .then(res => res.json())
-      .then(data => this.setState({ weather: data.properties.periods }));
   }
 
   onSubmitHours(e) {
@@ -86,7 +71,7 @@ export default class SearchForm extends Component {
     let promises = [];
 
     for (let loc of locations) {
-      let url = `https://api.weather.gov/points/${loc}/forecast`;
+      let url = `https://api.weather.gov/points/${loc.latlong}/forecast`;
       console.log(url);
 
       let promise = fetch(url, {
@@ -94,7 +79,7 @@ export default class SearchForm extends Component {
       })
         .then(res => res.json())
         // .then((data) => console.log(data.properties.periods));
-        .then(data => tempArray.push(data.properties.periods));
+        .then(data => tempArray.push({name: loc.name, locWeather: data.properties.periods}));
 
       promises.push(promise);
     }
@@ -105,19 +90,16 @@ export default class SearchForm extends Component {
     // setTimeout(() => {
     // this.setState({ weather: tempArray });
     // }, 1);
-    this.setState({ cats: true });
-    console.log(this.state.cats);
   }
 
   render() {
     console.log(this.state.weather);
     let weatherItems = [];
     let thisWeatherItem;
-    for (let city of this.state.weather) {
+    for (let city in this.state.weather.locWeather) {
       thisWeatherItem = city.map(item => (
         <div key={item.number}>
-          <h3>{item.name}</h3>
-          <p>{item.temperature}</p>
+          <h3>{item.name}: {item.detailedForecast}</h3>
         </div>
       ));
       weatherItems.push(thisWeatherItem);
