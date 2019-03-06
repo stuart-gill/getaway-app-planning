@@ -94,6 +94,7 @@ export default class SearchForm extends Component {
           <p>
             {item.name}: {item.detailedForecast}
           </p>
+          <img src={item.icon} alt={item.name} />
         </div>
       ));
       let name = (
