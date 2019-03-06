@@ -28,9 +28,8 @@ export default class SearchForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      travelTime: "",
-      weather: [],
-      temperature: "75"
+      travelTime: "1.5",
+      weather: []
     };
 
     this.onChange = this.onChange.bind(this);
