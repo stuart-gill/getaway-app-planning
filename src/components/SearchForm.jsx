@@ -24,6 +24,12 @@ const cityList = [
   }
 ];
 
+const gridStyle = {
+  display: "grid",
+  gridTemplateColumns: "150px 150px 150px 150px 150px",
+  gridTemplateRows: "150px 150px 150px"
+};
+
 export default class SearchForm extends Component {
   constructor(props) {
     super(props);
@@ -92,7 +98,8 @@ export default class SearchForm extends Component {
       thisWeatherItem = this.state.weather[i].locWeather.map(item => (
         <div key={item.number}>
           <p>
-            {item.name}: {item.detailedForecast}
+            {item.name}: {item.temperature}
+            {/* {item.detailedForecast} */}
           </p>
           <img src={item.icon} alt={item.name} />
         </div>
@@ -149,8 +156,7 @@ export default class SearchForm extends Component {
           <br />
           <button type="submit"> Submit </button>
         </form>
-
-        {weatherItems}
+        <div style={gridStyle}>{weatherItems}</div>
       </div>
     );
   }

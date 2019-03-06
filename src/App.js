@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 
 import "./App.css";
-import Contact from "./components/Contact";
+
 import Header from "./components/Header";
-import ResultItem from "./components/ResultItem";
-import ResultsList from "./components/ResultsList";
+
 import SearchForm from "./components/SearchForm";
 
 class App extends Component {
@@ -34,10 +33,6 @@ class App extends Component {
             acceptableWeather={this.state.acceptableWeather}
           />
         </header>
-        <Contact />
-
-        <ResultItem />
-        <ResultsList />
         <SearchForm />
       </div>
     );
