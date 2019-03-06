@@ -42,10 +42,6 @@ export default class SearchForm extends Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  onChangeSlider(e) {
-    this.setState({ [e.target.name]: e.target.value });
-  }
-
   determineSuitableCities(travelTime) {
     let locArray = [];
     for (let i = 0; i < cityList.length; i++) {
@@ -87,8 +83,6 @@ export default class SearchForm extends Component {
     Promise.all(promises).then(() => {
       this.setState({ weather: tempArray });
     });
-    this.setState({ cats: true });
-    console.log(this.state.cats);
   }
 
   render() {
@@ -128,7 +122,7 @@ export default class SearchForm extends Component {
         <h1>New Search</h1>
 
         <form onSubmit={this.onSubmitHours}>
-          <div>
+          {/* <div>
             <label>Temperature</label>
             <input
               type="range"
@@ -141,7 +135,7 @@ export default class SearchForm extends Component {
               onChange={this.onChange}
             />
             <h2 id="showTemp">{this.state.temperature}</h2>
-          </div>
+          </div> */}
           <div>
             <label>Hours willing to travel</label>
             <br />

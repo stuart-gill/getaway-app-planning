@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
+
 import "./App.css";
 import Contact from "./components/Contact";
 import Header from "./components/Header";
@@ -11,21 +11,29 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      weather: []
+      temperature: "75"
     };
+    this.handleChangeSlider = this.handleChangeSlider.bind(this);
+  }
+
+  handleChangeSlider(e) {
+    this.setState({ [e.target.name]: e.target.value });
   }
 
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <Contact />
-          <Header />
-          <ResultItem />
-          <ResultsList />
-          <SearchForm />
+          <Header
+            handleChangeSlider={this.handleChangeSlider}
+            temperature={this.state.temperature}
+          />
         </header>
+        <Contact />
+
+        <ResultItem />
+        <ResultsList />
+        <SearchForm />
       </div>
     );
   }
