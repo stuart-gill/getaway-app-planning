@@ -47,6 +47,9 @@ export default class Header extends Component {
           </select>
           <h3 style={headerStyle}>{this.props.acceptableWeather}</h3>
         </form>
+        {/* <form onSubmit={this.onSubmitHours}>
+          <button type="submit"> Submit </button>
+        </form> */}
       </div>
     );
   }
