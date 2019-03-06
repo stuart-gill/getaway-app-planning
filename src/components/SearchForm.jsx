@@ -24,13 +24,25 @@ const cityList = [
   }
 ];
 
+const gridStyle = {
+  display: "grid",
+  gridTemplateColumns: "150px 150px 150px 150px 150px",
+  gridTemplateRows: "50px 150px 150px 150px",
+  textAlign: "center"
+};
+
+const cityName = {
+  textAlign: "center",
+  gridColumnStart: "1",
+  gridColumnEnd: "6"
+};
+
 export default class SearchForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      travelTime: "",
-      weather: [],
-      temperature: "75"
+      travelTime: "1.5",
+      weather: []
     };
 
     this.onChange = this.onChange.bind(this);
@@ -39,10 +51,6 @@ export default class SearchForm extends Component {
   }
 
   onChange(e) {
-    this.setState({ [e.target.name]: e.target.value });
-  }
-
-  onChangeSlider(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
 
@@ -61,7 +69,9 @@ export default class SearchForm extends Component {
 
   onSubmitHours(e) {
     e.preventDefault();
-    let locations = this.determineSuitableCities(this.state.travelTime);
+    let locations = this.determineSuitableCities(
+      this.props.acceptableTravelTime
+    );
     let tempArray = [];
     let promises = [];
 
@@ -87,8 +97,6 @@ export default class SearchForm extends Component {
     Promise.all(promises).then(() => {
       this.setState({ weather: tempArray });
     });
-    this.setState({ cats: true });
-    console.log(this.state.cats);
   }
 
   render() {
@@ -99,17 +107,20 @@ export default class SearchForm extends Component {
       thisWeatherItem = this.state.weather[i].locWeather.map(item => (
         <div key={item.number}>
           <p>
-            {item.name}: {item.detailedForecast}
+            {item.name}: {item.temperature}
+            {/* {item.detailedForecast} */}
           </p>
+          <img src={item.icon} alt={item.name} />
         </div>
       ));
       let name = (
-        <div key={i}>
-          <h3>{this.state.weather[i].name}</h3>
+        <div key={i} style={cityName}>
+          <h2>{this.state.weather[i].name}</h2>
         </div>
       );
-      thisWeatherItem.unshift(name);
+      // thisWeatherItem.unshift(name);
       console.log(`this weather item = ${thisWeatherItem}`);
+      weatherItems.push(name);
       weatherItems.push(thisWeatherItem);
     }
 
@@ -128,35 +139,9 @@ export default class SearchForm extends Component {
         <h1>New Search</h1>
 
         <form onSubmit={this.onSubmitHours}>
-          <div>
-            <label>Temperature</label>
-            <input
-              type="range"
-              id="temperatureSlider"
-              min="20"
-              defaultValue="75"
-              max="100"
-              step="2"
-              name="temperature"
-              onChange={this.onChange}
-            />
-            <h2 id="showTemp">{this.state.temperature}</h2>
-          </div>
-          <div>
-            <label>Hours willing to travel</label>
-            <br />
-            <input
-              type="number"
-              name="travelTime"
-              onChange={this.onChange}
-              value={this.state.travelTime}
-            />
-          </div>
-          <br />
           <button type="submit"> Submit </button>
         </form>
-
-        {weatherItems}
+        <div style={gridStyle}>{weatherItems}</div>
       </div>
     );
   }
