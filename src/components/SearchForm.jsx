@@ -27,7 +27,14 @@ const cityList = [
 const gridStyle = {
   display: "grid",
   gridTemplateColumns: "150px 150px 150px 150px 150px",
-  gridTemplateRows: "150px 150px 150px"
+  gridTemplateRows: "50px 150px 150px 150px",
+  textAlign: "center"
+};
+
+const cityName = {
+  textAlign: "center",
+  gridColumnStart: "1",
+  gridColumnEnd: "6"
 };
 
 export default class SearchForm extends Component {
@@ -105,12 +112,13 @@ export default class SearchForm extends Component {
         </div>
       ));
       let name = (
-        <div key={i}>
-          <h3>{this.state.weather[i].name}</h3>
+        <div key={i} style={cityName}>
+          <h2>{this.state.weather[i].name}</h2>
         </div>
       );
-      thisWeatherItem.unshift(name);
+      // thisWeatherItem.unshift(name);
       console.log(`this weather item = ${thisWeatherItem}`);
+      weatherItems.push(name);
       weatherItems.push(thisWeatherItem);
     }
 
