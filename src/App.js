@@ -33,7 +33,7 @@ class App extends Component {
             acceptableWeather={this.state.acceptableWeather}
           />
         </header>
-        <SearchForm />
+        <SearchForm acceptableTravelTime={this.state.acceptableTravelTime} />
       </div>
     );
   }
