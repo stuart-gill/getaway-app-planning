@@ -1,10 +1,15 @@
-import { ADD_WEATHER } from "../constants/action-types";
+import { ADD_WEATHER, SORT_CITIES } from "../constants/action-types";
 const initialState = {
-  reduxWeather: []
+  reduxWeather: "default Redux weather",
+  sortedWeather: []
 };
 function rootReducer(state = initialState, action) {
   if (action.type === ADD_WEATHER) {
-    console.log(action.payload);
+    console.log(`add weather ran with payload of ${action.payload}`);
+    return Object.assign({}, state, action.payload);
+  }
+  if (action.type === SORT_CITIES) {
+    console.log(`sort cities reducer run with payload of ${action.payload}`);
     return Object.assign({}, state, action.payload);
   }
   return state;

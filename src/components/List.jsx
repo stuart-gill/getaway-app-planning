@@ -1,11 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
 
-const mapStateToProps = state => {
-  return { reduxWeather: state.acceptableWeather };
+const mapStateToProps = (state) => {
+  return { reduxWeather: state.reduxWeather };
 };
 
-const ConnectedList = ({ reduxWeather }) => <p>{reduxWeather}</p>;
+const ConnectedList = ({ reduxWeather }) => (
+  <p>Redux weather from List comp: {reduxWeather}</p>
+);
 
 const List = connect(mapStateToProps)(ConnectedList);
 export default List;

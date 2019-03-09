@@ -4,7 +4,7 @@ import { addWeather } from "../actions/index";
 
 function mapDispatchToProps(dispatch) {
   return {
-    addWeather: reduxWeather => dispatch(addWeather(reduxWeather))
+    addWeather: (reduxWeather) => dispatch(addWeather(reduxWeather))
   };
 }
 
@@ -26,8 +26,8 @@ class ConnectedHeader extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const { acceptableWeather } = this.state;
-    this.props.addWeather({ acceptableWeather }); //this is the Redux part-- action dispatched
+    const acceptableWeather = this.state.acceptableWeather;
+    this.props.addWeather({ reduxWeather: acceptableWeather }); //this is the Redux part-- action dispatched
     // this.setState({ acceptableWeather: "sunny" }); (if it's desired to reset local state)
   }
 
