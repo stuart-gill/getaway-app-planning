@@ -11,7 +11,7 @@ function rootReducer(state = initialState, action) {
   }
   if (action.type === SORT_CITIES) {
     console.log(`sort cities reducer run with payload of ${action.payload}`);
-    return Object.assign({}, state, action.payload);
+    return Object.assign({}, state, { sortedCities: action.payload });
   }
   return state;
 }
