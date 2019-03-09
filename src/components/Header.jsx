@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { addWeather } from "../actions/index";
+import { addWeather, sortCities } from "../actions/index";
 
 function mapDispatchToProps(dispatch) {
   return {
-    addWeather: (reduxWeather) => dispatch(addWeather(reduxWeather))
+    addWeather: (reduxWeather) => dispatch(addWeather(reduxWeather)),
+    sortCities: (reduxTime) => dispatch(sortCities(reduxTime))
   };
 }
 
@@ -26,9 +27,12 @@ class ConnectedHeader extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const acceptableWeather = this.state.acceptableWeather;
-    this.props.addWeather({ reduxWeather: acceptableWeather }); //this is the Redux part-- action dispatched
+    const reduxWeather = this.state.acceptableWeather;
+    //by putting reduxWeather in curlies below the payload becomes an object {reduxweather: "sunny"}
+    this.props.addWeather({ reduxWeather }); //this is the Redux part-- action dispatched
     // this.setState({ acceptableWeather: "sunny" }); (if it's desired to reset local state)
+    const reduxTime = this.state.acceptableTravelTime;
+    this.props.sortCities({ reduxTime });
   }
 
   render() {

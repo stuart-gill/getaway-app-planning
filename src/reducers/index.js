@@ -1,7 +1,8 @@
 import { ADD_WEATHER, SORT_CITIES } from "../constants/action-types";
 const initialState = {
   reduxWeather: "default Redux weather",
-  sortedWeather: []
+  sortedWeather: [],
+  sortedCities: []
 };
 function rootReducer(state = initialState, action) {
   if (action.type === ADD_WEATHER) {
