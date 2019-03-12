@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import "./App.css";
 
 import Header from "./components/Header";
+import List from "./components/List";
 
 import SearchForm from "./components/SearchForm";
 
@@ -10,30 +11,19 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      temperature: "75",
-      weather: [],
-      acceptableTravelTime: "1.5",
-      acceptableWeather: "sunny"
+      reduxWeather: [],
+      acceptableTravelTime: "3" //this time is currently hardcoded (not just default setting), since the slider
     };
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-  handleChange(e) {
-    this.setState({ [e.target.name]: e.target.value });
   }
 
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          <Header
-            handleChange={this.handleChange}
-            temperature={this.state.temperature}
-            acceptableTravelTime={this.state.acceptableTravelTime}
-            acceptableWeather={this.state.acceptableWeather}
-          />
+          <Header />
         </header>
         <SearchForm acceptableTravelTime={this.state.acceptableTravelTime} />
+        <List />
       </div>
     );
   }
