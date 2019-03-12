@@ -1,9 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-const mapStateToProps = state => {
-  return { reduxWeather: state.reduxWeather, sortedCities: state.sortedCities };
-};
+//don't need this.props.reduxWeather because this is a functional component , not class component
 
 const ConnectedList = ({ reduxWeather, sortedCities }) => (
   <div>
@@ -20,40 +18,17 @@ const ConnectedList = ({ reduxWeather, sortedCities }) => (
   </div>
 );
 
-const List = connect(mapStateToProps)(ConnectedList);
+const mapStateToProps = state => {
+  return { reduxWeather: state.reduxWeather, sortedCities: state.sortedCities };
+};
+
+const List = connect(mapStateToProps)(ConnectedList); //connect() returns another function. The second () invokes that returned function
+
 export default List;
 
 // The List component receives the prop reduxWeather which is a copy of the reduxWeather array we saw in the Redux state. It comes from the reducer:
 //Always remeber: the state in redux comes from reducers
 
-// Class based component version
-// class List extends Component {
-//   constructor(props) {
-//     super(props);
-//   }
-
-//   render() {
-//     return (
-//       <div>
-//         <p>Redux weather from List comp: {this.props.reduxWeather}</p>
-//         <ul className="list-group list-group-flush">
-//           {setTimeout(() => {
-//             this.props.sortedCities.map(el => (
-//               <li className="list-group-item" key={el.id}>
-//                 Sorted city: {el.name}
-//                 <br />
-//                 Sorted city location: {el.latlong}
-//               </li>
-//             ));
-//           }, 3500)}
-//         </ul>
-//       </div>
-//     );
-//   }
-// }
-
 // const mapStateToProps = ({ reduxWeather, sortedCities }) => {
 //   return { reduxWeather, sortedCities }; //this was Alex's MSTP method
 // };
-
-// export default connect(mapStateToProps)(List);
