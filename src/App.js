@@ -11,7 +11,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      reduxWeather: []
+      reduxWeather: [],
+      acceptableTravelTime: "3" //this time is currently hardcoded (not just default setting), since the slider
     };
   }
 
