@@ -29,7 +29,7 @@ class ConnectedHeader extends Component {
     event.preventDefault();
     const reduxWeather = this.state.acceptableWeather;
     //by putting reduxWeather in curlies below the payload becomes an object {reduxweather: "sunny"}
-    this.props.addWeather({ reduxWeather }); //to make this work with split reducers, remove curlies
+    this.props.addWeather({ reduxWeather });
     //this is the Redux part-- action dispatched
     // this.setState({ acceptableWeather: "sunny" }); (if it's desired to reset local state)
     const reduxTime = this.state.acceptableTravelTime;

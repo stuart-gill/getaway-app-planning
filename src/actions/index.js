@@ -1,6 +1,7 @@
 import { ADD_WEATHER, SORT_CITIES } from "../constants/action-types";
 
 export function addWeather(payload) {
+  console.log(payload);
   return { type: ADD_WEATHER, payload };
 }
 export function sortCities(payload) {
