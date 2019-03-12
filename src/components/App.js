@@ -2,10 +2,10 @@ import React, { Component } from "react";
 
 import "./App.css";
 
-import Header from "./components/Header";
-import List from "./components/List";
+import Header from "./Header";
+import List from "./List";
 
-import SearchForm from "./components/SearchForm";
+import SearchForm from "./SearchForm";
 
 class App extends Component {
   constructor(props) {

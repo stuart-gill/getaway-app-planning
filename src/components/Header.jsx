@@ -95,3 +95,5 @@ const Header = connect(
   mapDispatchToProps
 )(ConnectedHeader);
 export default Header;
+
+//connect tag is special because it can communicate directly with provider to get store state using the "context" system, regardless of how high or low this component is in the tree
