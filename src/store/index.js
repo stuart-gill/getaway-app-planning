@@ -1,5 +1,8 @@
 import { createStore, applyMiddleware, compose } from "redux";
+
 import rootReducer from "../reducers/index";
+//import rootReducer from "../reducers/rootReducer"; //trying to split up reducers
+
 import { sortCitiesMiddleware } from "../middleware";
 import thunk from "redux-thunk";
 
