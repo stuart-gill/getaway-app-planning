@@ -4,6 +4,7 @@ import {
   SELECT_CITY,
   FETCH_WEATHER
 } from "../constants/action-types";
+import weatherDotGov from "../apis/weatherDotGov";
 
 // export function addWeather(payload) {
 //   console.log(payload);
@@ -22,9 +23,12 @@ export const selectCity = city => {
   return { type: SELECT_CITY, payload: city };
 };
 
-export const fetchWeather = () => {
-  return { type: FETCH_WEATHER };
+export const fetchWeather = () => async (dispatch, getState) => {
+  const response = await weatherDotGov.get(`/47.5962%2C-120.6615/forecast`);
+
+  dispatch({ type: FETCH_WEATHER, payload: response.data.properties.periods });
 };
+//^^replace hardcode lat long with ${loc.latlong}
 
 //why does payload here not have to be payload: {name, latlong, etc}
 //maybe because sortedcities payload is an array of objects
