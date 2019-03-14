@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { selectCity } from "../actions";
+import WeatherList from "./WeatherList";
 
 class List extends Component {
   renderList() {
@@ -11,6 +12,7 @@ class List extends Component {
             <button onClick={() => this.props.selectCity(city)}>
               {city.name}
             </button>
+            <WeatherList location={city.latlong} />
           </div>
         </div>
       );

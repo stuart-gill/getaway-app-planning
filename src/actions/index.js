@@ -23,11 +23,20 @@ export const selectCity = city => {
   return { type: SELECT_CITY, payload: city };
 };
 
-export const fetchWeather = () => async (dispatch, getState) => {
-  const response = await weatherDotGov.get(`/47.5962%2C-120.6615/forecast`);
+export const fetchWeatherDynamically = location => async (
+  dispatch,
+  getState
+) => {
+  const response = await weatherDotGov.get(`/${location}/forecast`);
 
   dispatch({ type: FETCH_WEATHER, payload: response.data.properties.periods });
 };
+
+// export const fetchWeather = () => async (dispatch, getState) => {
+//   const response = await weatherDotGov.get(`/47.5962%2C-120.6615/forecast`);
+
+//   dispatch({ type: FETCH_WEATHER, payload: response.data.properties.periods });
+// };
 //^^replace hardcode lat long with ${loc.latlong}
 
 //why does payload here not have to be payload: {name, latlong, etc}
