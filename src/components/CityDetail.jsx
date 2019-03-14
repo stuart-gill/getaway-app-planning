@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 const CityDetail = ({ selectedCity, sortedCities }) => {
   console.log({ selectedCity });
   if (sortedCities.length === 0) {
-    return <div>Try a new weather serach!</div>;
+    return <div>Try a new weather search!</div>;
   } else if (!selectedCity) {
     return (
       <div>

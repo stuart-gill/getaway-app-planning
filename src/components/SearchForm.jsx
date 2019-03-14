@@ -135,8 +135,6 @@ export default class SearchForm extends Component {
 
     return (
       <div>
-        <h1>New Search</h1>
-
         <form onSubmit={this.onSubmitHours}>
           <button type="submit"> Submit </button>
         </form>

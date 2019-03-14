@@ -6,6 +6,7 @@ import Header from "./Header";
 import List from "./List";
 import CityDetail from "./CityDetail";
 import SearchForm from "./SearchForm";
+import WeatherList from "./WeatherList";
 
 class App extends Component {
   constructor(props) {
@@ -22,9 +23,10 @@ class App extends Component {
         <header className="App-header">
           <Header />
         </header>
-        <SearchForm acceptableTravelTime={this.state.acceptableTravelTime} />
+        <WeatherList />
         <List />
         <CityDetail />
+        {/* <SearchForm acceptableTravelTime={this.state.acceptableTravelTime} /> */}
       </div>
     );
   }
