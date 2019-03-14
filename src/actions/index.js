@@ -2,7 +2,8 @@ import {
   ADD_WEATHER,
   SORT_CITIES,
   SELECT_CITY,
-  FETCH_WEATHER
+  FETCH_WEATHER,
+  FETCH_WEATHER_DYNAMICALLY
 } from "../constants/action-types";
 import weatherDotGov from "../apis/weatherDotGov";
 
@@ -29,7 +30,10 @@ export const fetchWeatherDynamically = location => async (
 ) => {
   const response = await weatherDotGov.get(`/${location}/forecast`);
 
-  dispatch({ type: FETCH_WEATHER, payload: response.data.properties.periods });
+  dispatch({
+    type: FETCH_WEATHER_DYNAMICALLY,
+    payload: response.data.properties.periods
+  });
 };
 
 // export const fetchWeather = () => async (dispatch, getState) => {
