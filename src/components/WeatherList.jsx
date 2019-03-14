@@ -7,12 +7,31 @@ class WeatherList extends Component {
     this.props.fetchWeather();
   }
 
+  //helper method to map weatherlist that keeps render method itself cleaner
+  renderList() {
+    return this.props.weatherList.map(item => {
+      return (
+        <div key={item.number}>
+          <div>
+            <h2>{item.name}</h2>
+            <p>{item.detailedForecast}</p>
+            <img src={item.icon} alt="weather icon" />
+          </div>
+        </div>
+      );
+    });
+  }
+
   render() {
-    return <div>weather list</div>;
+    return <div>{this.renderList()}</div>;
   }
 }
 
+const mapStateToProps = state => {
+  return { weatherList: state.fetchWeather };
+};
+
 export default connect(
-  null,
+  mapStateToProps,
   { fetchWeather }
 )(WeatherList);

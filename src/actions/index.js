@@ -26,7 +26,7 @@ export const selectCity = city => {
 export const fetchWeather = () => async (dispatch, getState) => {
   const response = await weatherDotGov.get(`/47.5962%2C-120.6615/forecast`);
 
-  dispatch({ type: FETCH_WEATHER, payload: response });
+  dispatch({ type: FETCH_WEATHER, payload: response.data.properties.periods });
 };
 //^^replace hardcode lat long with ${loc.latlong}
 

@@ -2,7 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 
 const CityDetail = ({ selectedCity, sortedCities }) => {
-  console.log({ selectedCity });
   if (sortedCities.length === 0) {
     return <div>Try a new weather search!</div>;
   } else if (!selectedCity) {
@@ -15,7 +14,11 @@ const CityDetail = ({ selectedCity, sortedCities }) => {
     return (
       <div>
         <h2>Details for: {selectedCity.name}</h2>
-        <a href={selectedCity.lodging} target="_blank">
+        <a
+          href={selectedCity.lodging}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           Check Lodging Options
         </a>
         <img src={selectedCity.img} alt={selectedCity.name} />
