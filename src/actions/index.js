@@ -1,7 +1,8 @@
 import {
   ADD_WEATHER,
   SORT_CITIES,
-  SELECT_CITY
+  SELECT_CITY,
+  FETCH_WEATHER
 } from "../constants/action-types";
 
 // export function addWeather(payload) {
@@ -19,6 +20,10 @@ export const sortCities = payload => {
 
 export const selectCity = city => {
   return { type: SELECT_CITY, payload: city };
+};
+
+export const fetchWeather = () => {
+  return { type: FETCH_WEATHER };
 };
 
 //why does payload here not have to be payload: {name, latlong, etc}

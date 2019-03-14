@@ -14,7 +14,7 @@ const CityDetail = ({ selectedCity, sortedCities }) => {
   } else {
     return (
       <div>
-        <h2>{selectedCity.name}</h2>
+        <h2>Details for: {selectedCity.name}</h2>
         <a href={selectedCity.lodging} target="_blank">
           Check Lodging Options
         </a>
