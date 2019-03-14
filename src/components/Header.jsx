@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { addWeather, sortCities } from "../actions/index";
+import { addWeather, sortCities } from "../actions"; //pass these into second argument in connect() and you don't need to mapDisptachToProps or call dispatch anywhere
 
-function mapDispatchToProps(dispatch) {
-  return {
-    addWeather: (reduxWeather) => dispatch(addWeather(reduxWeather)),
-    sortCities: (reduxTime) => dispatch(sortCities(reduxTime))
-  };
-}
+// function mapDispatchToProps(dispatch) {
+//   return {
+//     addWeather: reduxWeather => dispatch(addWeather(reduxWeather)),
+//     sortCities: reduxTime => dispatch(sortCities(reduxTime))
+//   };
+// }
 
 class ConnectedHeader extends Component {
   constructor(props) {
@@ -29,7 +29,8 @@ class ConnectedHeader extends Component {
     event.preventDefault();
     const reduxWeather = this.state.acceptableWeather;
     //by putting reduxWeather in curlies below the payload becomes an object {reduxweather: "sunny"}
-    this.props.addWeather({ reduxWeather }); //this is the Redux part-- action dispatched
+    this.props.addWeather({ reduxWeather });
+    //this is the Redux part-- action dispatched
     // this.setState({ acceptableWeather: "sunny" }); (if it's desired to reset local state)
     const reduxTime = this.state.acceptableTravelTime;
     this.props.sortCities({ reduxTime });
@@ -89,8 +90,16 @@ class ConnectedHeader extends Component {
   }
 }
 
+// const Header = connect(
+//   null,
+//   mapDispatchToProps
+// )(ConnectedHeader);
+// export default Header;
+
 const Header = connect(
   null,
-  mapDispatchToProps
+  { addWeather, sortCities } //this is taking the place of mapdispatchtoprops--connect() automatically puts these action creators into a dispatch function
 )(ConnectedHeader);
 export default Header;
+
+//connect tag is special because it can communicate directly with provider to get store state using the "context" system, regardless of how high or low this component is in the tree

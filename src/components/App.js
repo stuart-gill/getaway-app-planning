@@ -2,10 +2,10 @@ import React, { Component } from "react";
 
 import "./App.css";
 
-import Header from "./components/Header";
-import List from "./components/List";
-
-import SearchForm from "./components/SearchForm";
+import Header from "./Header";
+import List from "./List";
+import CityDetail from "./CityDetail";
+import SearchForm from "./SearchForm";
 
 class App extends Component {
   constructor(props) {
@@ -24,6 +24,7 @@ class App extends Component {
         </header>
         <SearchForm acceptableTravelTime={this.state.acceptableTravelTime} />
         <List />
+        <CityDetail />
       </div>
     );
   }
