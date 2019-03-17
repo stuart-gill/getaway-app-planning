@@ -2,9 +2,7 @@ import {
   ADD_WEATHER,
   SORT_CITIES,
   SELECT_CITY,
-  FETCH_WEATHER,
-  FETCH_WEATHER_DYNAMICALLY,
-  CLEAR_WEATHER_LIST
+  FETCH_WEATHER_DYNAMICALLY
 } from "../constants/action-types";
 
 import weatherDotGov from "../apis/weatherDotGov";
@@ -24,10 +22,6 @@ export const sortCities = (payload) => {
 
 export const selectCity = (city) => {
   return { type: SELECT_CITY, payload: city };
-};
-
-export const clearWeatherList = () => {
-  return { type: CLEAR_WEATHER_LIST };
 };
 
 export const fetchWeatherDynamically = (location) => async (

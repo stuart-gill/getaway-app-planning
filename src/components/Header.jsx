@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { addWeather, sortCities, clearWeatherList } from "../actions"; //pass these into second argument in connect() and you don't need to mapDisptachToProps or call dispatch anywhere
+import { addWeather, sortCities } from "../actions"; //pass these into second argument in connect() and you don't need to mapDisptachToProps or call dispatch anywhere
 
 // function mapDispatchToProps(dispatch) {
 //   return {
@@ -99,7 +99,7 @@ class ConnectedHeader extends Component {
 
 const Header = connect(
   null,
-  { addWeather, sortCities, clearWeatherList } //this is taking the place of mapdispatchtoprops--connect() automatically puts these action creators into a dispatch function
+  { addWeather, sortCities } //this is taking the place of mapdispatchtoprops--connect() automatically puts these action creators into a dispatch function
 )(ConnectedHeader);
 export default Header;
 

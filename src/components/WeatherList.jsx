@@ -41,7 +41,7 @@ class WeatherList extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    dynamicWeatherList: state.dynamicWeather[ownProps.location]
+    dynamicWeatherList: state.dynamicWeather[ownProps.location] //square brackets is a way to evaluate a variable in object notation... dot notation would not allow this
   };
 };
 
