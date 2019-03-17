@@ -3,8 +3,10 @@ import {
   SORT_CITIES,
   SELECT_CITY,
   FETCH_WEATHER,
-  FETCH_WEATHER_DYNAMICALLY
+  FETCH_WEATHER_DYNAMICALLY,
+  CLEAR_WEATHER_LIST
 } from "../constants/action-types";
+
 import weatherDotGov from "../apis/weatherDotGov";
 
 // export function addWeather(payload) {
@@ -12,19 +14,23 @@ import weatherDotGov from "../apis/weatherDotGov";
 //   return { type: ADD_WEATHER, payload };
 // } // non-fat-arrow version
 
-export const addWeather = newWeather => {
+export const addWeather = (newWeather) => {
   return { type: ADD_WEATHER, payload: newWeather };
 };
 
-export const sortCities = payload => {
+export const sortCities = (payload) => {
   return { type: SORT_CITIES, payload };
 };
 
-export const selectCity = city => {
+export const selectCity = (city) => {
   return { type: SELECT_CITY, payload: city };
 };
 
-export const fetchWeatherDynamically = location => async (
+export const clearWeatherList = () => {
+  return { type: CLEAR_WEATHER_LIST };
+};
+
+export const fetchWeatherDynamically = (location) => async (
   dispatch,
   getState
 ) => {
@@ -32,7 +38,8 @@ export const fetchWeatherDynamically = location => async (
 
   dispatch({
     type: FETCH_WEATHER_DYNAMICALLY,
-    payload: response.data.properties.periods
+    //payload: { location: location, data: response.data.properties.periods }
+    payload: { [location]: response.data.properties.periods }
   });
 };
 

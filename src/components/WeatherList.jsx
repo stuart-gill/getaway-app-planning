@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-//import { fetchWeather } from "../actions";
 import { fetchWeatherDynamically } from "../actions";
 
 class WeatherList extends Component {
@@ -32,14 +31,17 @@ class WeatherList extends Component {
   // }
 
   render() {
-    return <div>{this.renderList()}</div>;
+    if (this.props.dynamicWeatherList !== undefined) {
+      return <div>{this.renderList()}</div>;
+    } else {
+      return null;
+    }
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
   return {
-    weatherList: state.fetchWeather,
-    dynamicWeatherList: state.fetchWeatherDynamically
+    dynamicWeatherList: state.dynamicWeather[ownProps.location]
   };
 };
 

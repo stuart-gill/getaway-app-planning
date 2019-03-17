@@ -1,9 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { selectCity } from "../actions";
+import { selectCity, clearWeatherList } from "../actions";
 import WeatherList from "./WeatherList";
 
 class List extends Component {
+  // componentWillUpdate() {
+  //   this.props.clearWeatherList();
+  // }
+
   renderList() {
     return this.props.sortedCities.map((city) => {
       return (
@@ -12,7 +16,8 @@ class List extends Component {
             <button onClick={() => this.props.selectCity(city)}>
               {city.name}
             </button>
-            <WeatherList location={city.latlong} />
+            <WeatherList location={city.latlong} name={city.name} />
+            {console.log(`weatherlist run with location of ${city.latlong}`)}
           </div>
         </div>
       );
@@ -37,7 +42,7 @@ const mapStateToProps = (state) => {
 
 export default connect(
   mapStateToProps,
-  { selectCity } //this function is wrapped in a store.dispatch function by connect() method
+  { selectCity, clearWeatherList } //this function is wrapped in a store.dispatch function by connect() method
 )(List);
 
 //don't need this.props.reduxWeather because this is a functional component , not class component
