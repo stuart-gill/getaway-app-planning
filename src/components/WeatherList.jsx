@@ -12,32 +12,35 @@ class WeatherList extends Component {
   //   this.props.fetchWeather();
   // }
 
-  // //helper method to map weatherlist that keeps render method itself cleaner
-  // renderList() {
-  //   return this.props.weatherList.map(item => {
-  //     return (
-  //       <div key={item.number}>
-  //         <div>
-  //           <h2>{item.name}</h2>
-  //           <p>{item.detailedForecast}</p>
-  //           <img src={item.icon} alt="weather icon" />
-  //         </div>
-  //       </div>
-  //     );
-  //   });
-  // }
-
-  render() {
-    return <div>WeatherList</div>;
+  //helper method to map weatherlist that keeps render method itself cleaner
+  renderList() {
+    return this.props.dynamicWeatherList.map((item) => {
+      return (
+        <div key={item.number}>
+          <div>
+            <h2>{item.name}</h2>
+            <p>{item.detailedForecast}</p>
+            <img src={item.icon} alt="weather list" />
+          </div>
+        </div>
+      );
+    });
   }
 
   // render() {
-  //   return <div>{this.renderList()}</div>;
+  //   return <div>WeatherList</div>;
   // }
+
+  render() {
+    return <div>{this.renderList()}</div>;
+  }
 }
 
-const mapStateToProps = state => {
-  return { weatherList: state.fetchWeather };
+const mapStateToProps = (state) => {
+  return {
+    weatherList: state.fetchWeather,
+    dynamicWeatherList: state.fetchWeatherDynamically
+  };
 };
 
 export default connect(

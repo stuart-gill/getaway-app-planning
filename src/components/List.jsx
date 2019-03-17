@@ -5,7 +5,7 @@ import WeatherList from "./WeatherList";
 
 class List extends Component {
   renderList() {
-    return this.props.sortedCities.map(city => {
+    return this.props.sortedCities.map((city) => {
       return (
         <div key={city.id}>
           <div>
@@ -19,15 +19,19 @@ class List extends Component {
     });
   }
   render() {
-    return (
-      <div>
-        <div>{this.renderList()}</div>
-      </div>
-    );
+    if (this.props.sortedCities.length !== 0) {
+      return (
+        <div>
+          <div>{this.renderList()}</div>
+        </div>
+      );
+    } else {
+      return null;
+    }
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return { reduxWeather: state.reduxWeather, sortedCities: state.sortedCities };
 };
 
