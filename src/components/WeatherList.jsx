@@ -7,13 +7,9 @@ class WeatherList extends Component {
     this.props.fetchWeatherDynamically(this.props.location);
   }
 
-  // componentDidMount() {
-  //   this.props.fetchWeather();
-  // }
-
   //helper method to map weatherlist that keeps render method itself cleaner
   renderList() {
-    return this.props.dynamicWeatherList.map((item) => {
+    return this.props.thisCitysWeather.map((item) => {
       return (
         <div key={item.number}>
           <div>
@@ -26,12 +22,8 @@ class WeatherList extends Component {
     });
   }
 
-  // render() {
-  //   return <div>WeatherList</div>;
-  // }
-
   render() {
-    if (this.props.dynamicWeatherList !== undefined) {
+    if (this.props.thisCitysWeather !== undefined) {
       return <div>{this.renderList()}</div>;
     } else {
       return null;
@@ -41,7 +33,7 @@ class WeatherList extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    dynamicWeatherList: state.dynamicWeather[ownProps.location] //square brackets is a way to evaluate a variable in object notation... dot notation would not allow this
+    thisCitysWeather: state.dynamicWeather[ownProps.location] //square brackets is a way to evaluate a variable in object notation... dot notation would not allow this
   };
 };
 
