@@ -1,31 +1,53 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { selectCity } from "../actions";
+import WeatherList from "./WeatherList";
 
 class List extends Component {
   renderList() {
-    return this.props.sortedCities.map(city => {
+    console.log(this.props.sortedCities);
+    return this.props.sortedCities.map((city) => {
       return (
         <div key={city.id}>
           <div>
             <button onClick={() => this.props.selectCity(city)}>
               {city.name}
             </button>
+            <WeatherList location={city.latlong} name={city.name} />
+            {console.log(`weatherlist run with location of ${city.latlong}`)}
           </div>
         </div>
       );
     });
   }
-  render() {
+
+  renderError() {
+    const travelTime = ` ${this.props.sortedCities.reduxTime}`;
     return (
-      <div>
-        <div>{this.renderList()}</div>
-      </div>
+      <h2>
+        Sorry, there are no cities that are within
+        {travelTime} hours of travel. Try raising your travel time.
+      </h2>
     );
+  }
+
+  render() {
+    if (this.props.sortedCities.reduxTime) {
+      //tests for condition where sort cities middleware fails(no cities returned given redux time input, so sortcities returns the redux time instead of sorted cities array)
+      return <div>{this.renderError()}</div>;
+    } else if (this.props.sortedCities !== undefined) {
+      return (
+        <div>
+          <div>{this.renderList()}</div>
+        </div>
+      );
+    } else {
+      return null;
+    }
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return { reduxWeather: state.reduxWeather, sortedCities: state.sortedCities };
 };
 

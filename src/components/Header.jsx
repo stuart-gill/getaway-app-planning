@@ -27,6 +27,7 @@ class ConnectedHeader extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
+
     const reduxWeather = this.state.acceptableWeather;
     //by putting reduxWeather in curlies below the payload becomes an object {reduxweather: "sunny"}
     this.props.addWeather({ reduxWeather });

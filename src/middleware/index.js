@@ -37,7 +37,7 @@ export function sortCitiesMiddleware({ dispatch }) {
     return function(action) {
       if (action.type === SORT_CITIES) {
         const sortedCities = cityList.filter(
-          city => city.hours < action.payload.reduxTime
+          (city) => city.hours < action.payload.reduxTime
         );
 
         if (sortedCities.length) {
@@ -48,3 +48,5 @@ export function sortCitiesMiddleware({ dispatch }) {
     };
   };
 }
+//currently returns reduxTime state if sortedCities has no contents (no cities match time constraint)
+//need to change to giving some error output
