@@ -4,7 +4,7 @@ import {
   SELECT_CITY,
   FETCH_WEATHER_DYNAMICALLY
 } from "../constants/action-types";
-
+import _ from "lodash";
 import weatherDotGov from "../apis/weatherDotGov";
 
 // export function addWeather(payload) {
@@ -24,18 +24,33 @@ export const selectCity = (city) => {
   return { type: SELECT_CITY, payload: city };
 };
 
-export const fetchWeatherDynamically = (location) => async (
-  dispatch,
-  getState
-) => {
-  const response = await weatherDotGov.get(`/${location}/forecast`);
+//Non memoized version:
+// export const fetchWeatherDynamically = (location) => async (
+//   dispatch,
+//   getState
+// ) => {
+//   const response = await weatherDotGov.get(`/${location}/forecast`);
 
+//   dispatch({
+//     type: FETCH_WEATHER_DYNAMICALLY,
+//     //payload: { location: location, data: response.data.properties.periods }
+//     payload: { [location]: response.data.properties.periods }
+//   });
+// };
+
+//memoized API call:
+export const fetchWeatherDynamically = (location) => (dispatch) => {
+  _fetchWeatherDynamically(location, dispatch);
+};
+
+const _fetchWeatherDynamically = _.memoize(async (location, dispatch) => {
+  const response = await weatherDotGov.get(`/${location}/forecast`);
   dispatch({
     type: FETCH_WEATHER_DYNAMICALLY,
-    //payload: { location: location, data: response.data.properties.periods }
+
     payload: { [location]: response.data.properties.periods }
   });
-};
+});
 
 // export const fetchWeather = () => async (dispatch, getState) => {
 //   const response = await weatherDotGov.get(`/47.5962%2C-120.6615/forecast`);
