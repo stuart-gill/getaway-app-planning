@@ -11,8 +11,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      reduxWeather: [],
-      acceptableTravelTime: "3" //this time is currently hardcoded (not just default setting), since the slider
+      reduxWeather: []
+      // acceptableTravelTime: "3" //this doesn't need to be here any more?
     };
   }
 
@@ -22,9 +22,9 @@ class App extends Component {
         <header className="App-header">
           <Header />
         </header>
-
-        <List />
         <CityDetail />
+        <List />
+
         {/* <SearchForm acceptableTravelTime={this.state.acceptableTravelTime} /> */}
       </div>
     );

@@ -9,16 +9,21 @@ class WeatherList extends Component {
 
   //helper method to map weatherlist that keeps render method itself cleaner
   renderList() {
+    console.log("this city's weather: ", this.props.thisCitysWeather);
     return this.props.thisCitysWeather.map((item) => {
-      return (
-        <div key={item.number}>
-          <div>
-            <h2>{item.name}</h2>
-            <p>{item.detailedForecast}</p>
-            <img src={item.icon} alt="weather list" />
+      if (item.isDaytime && item.number < 8) {
+        return (
+          <div key={item.number}>
+            <div>
+              <h2>{item.name}</h2>
+              <p>
+                {item.temperature} + {item.shortForecast}
+              </p>
+              <img src={item.icon} alt="weather list" />
+            </div>
           </div>
-        </div>
-      );
+        );
+      }
     });
   }
 
