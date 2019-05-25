@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchWeatherDynamically } from "../actions";
+import WeatherListDisplay from "./WeatherListDisplay";
 
 class WeatherList extends Component {
   componentDidMount() {
@@ -14,13 +15,7 @@ class WeatherList extends Component {
       if (item.isDaytime && item.number < 8) {
         return (
           <div key={item.number}>
-            <div>
-              <h2>{item.name}</h2>
-              <p>
-                {item.temperature} + {item.shortForecast}
-              </p>
-              <img src={item.icon} alt="weather list" />
-            </div>
+            <WeatherListDisplay daysWeather={item} />
           </div>
         );
       }
