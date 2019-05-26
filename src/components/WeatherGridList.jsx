@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
   },
   gridList: {
     width: 900,
-    height: 3000
+    height: "auto"
   }
 }));
 
@@ -23,7 +23,7 @@ function WeatherGridList(props) {
 
   return (
     <div className={classes.root}>
-      <GridList cellHeight={400} className={classes.gridList} cols={3}>
+      <GridList cellHeight={"auto"} className={classes.gridList} cols={3}>
         {props.weatherList.map((item) => (
           <GridListTile key={item.number} cols={1}>
             <WeatherListCard daysWeather={item} />
