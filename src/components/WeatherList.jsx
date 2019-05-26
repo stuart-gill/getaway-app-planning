@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchWeatherDynamically } from "../actions";
-import WeatherListCard from "./WeatherListCard";
 import WeatherGridList from "./WeatherGridList";
 
 class WeatherList extends Component {
