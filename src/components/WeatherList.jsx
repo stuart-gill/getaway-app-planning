@@ -5,26 +5,20 @@ import WeatherGridList from "./WeatherGridList";
 
 class WeatherList extends Component {
   componentDidMount() {
-    this.props.fetchWeatherDynamically(this.props.location);
+    this.props.fetchWeatherDynamically(this.props.location); //runs the api call to get weather results
   }
 
-  //helper method to map weatherlist that keeps render method itself cleaner
+  //Is it ok to put sorting logic in this component, or should this be middleware? Is it okay to declare a constant inside a component like this or should it be state?
   renderList() {
     console.log("this city's weather: ", this.props.thisCitysWeather);
+    const sortedWeather = this.props.thisCitysWeather.filter(
+      (period) => period.isDaytime === true && period.number < 7
+    );
     return (
       <div>
-        <WeatherGridList weatherList={this.props.thisCitysWeather} />
+        <WeatherGridList weatherList={sortedWeather} />
       </div>
     );
-    // return this.props.thisCitysWeather.map((item) => {
-    //   if (item.isDaytime && item.number < 8) {
-    //     return (
-    //       <div key={item.number}>
-    //         <WeatherListCard daysWeather={item} />
-    //       </div>
-    //     );
-    //   }
-    // });
   }
 
   render() {
