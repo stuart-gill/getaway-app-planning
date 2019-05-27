@@ -12,6 +12,7 @@ import { addWeather, sortCities } from "../actions"; //pass these into second ar
 class ConnectedHeader extends Component {
   constructor(props) {
     super(props);
+    //this.state sets default state of header settings... local state only, not redux
     this.state = {
       temperature: "75",
       acceptableTravelTime: "1.5",
@@ -27,7 +28,7 @@ class ConnectedHeader extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-
+    //reduxWeather state is changed only on submit, not on change
     const reduxWeather = this.state.acceptableWeather;
     //by putting reduxWeather in curlies below the payload becomes an object {reduxweather: "sunny"}
     this.props.addWeather({ reduxWeather });

@@ -11,7 +11,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      reduxWeather: []
+      //reduxWeather: []
       // acceptableTravelTime: "3" //this doesn't need to be here any more?
     };
   }
