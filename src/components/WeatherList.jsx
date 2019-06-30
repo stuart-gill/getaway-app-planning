@@ -15,7 +15,7 @@ class WeatherList extends Component {
       period =>
         period.isDaytime === true &&
         period.number < 7 &&
-        period.temperature > this.props.reduxTemperature &&
+        period.temperature >= this.props.reduxTemperature &&
         period.shortForecast
           .toLowerCase()
           .includes(this.props.reduxWeather.toLowerCase())
