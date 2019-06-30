@@ -12,7 +12,13 @@ class WeatherList extends Component {
   renderList() {
     console.log("this city's weather: ", this.props.thisCitysWeather);
     const sortedWeather = this.props.thisCitysWeather.filter(
-      (period) => period.isDaytime === true && period.number < 7
+      period =>
+        period.isDaytime === true &&
+        period.number < 7 &&
+        period.temperature > this.props.reduxTemperature &&
+        period.shortForecast
+          .toLowerCase()
+          .includes(this.props.reduxWeather.toLowerCase())
     );
     return (
       <div>
@@ -31,8 +37,11 @@ class WeatherList extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
+  const { reduxWeather, reduxTemperature } = state;
   return {
-    thisCitysWeather: state.dynamicWeather[ownProps.location] //square brackets is a way to evaluate a variable in object notation... dot notation would not allow this
+    thisCitysWeather: state.dynamicWeather[ownProps.location],
+    reduxWeather,
+    reduxTemperature
   };
 };
 
