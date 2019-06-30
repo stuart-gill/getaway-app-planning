@@ -4,11 +4,13 @@ import sortedCities from "./sortedCities";
 import selectCity from "./selectCity";
 import fetchWeather from "./fetchWeather";
 import dynamicWeather from "./dynamicWeather";
+import reduxTemperature from "./reduxTemperature";
 
 export default combineReducers({
   reduxWeather,
   sortedCities,
   selectCity,
   fetchWeather,
-  dynamicWeather
+  dynamicWeather,
+  reduxTemperature
 });

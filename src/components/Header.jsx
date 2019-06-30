@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { addWeather, sortCities } from "../actions"; //pass these into second argument in connect() and you don't need to mapDisptachToProps or call dispatch anywhere
+import { addWeather, sortCities, addTemperature } from "../actions"; //pass these into second argument in connect() and you don't need to mapDisptachToProps or call dispatch anywhere
 
 // function mapDispatchToProps(dispatch) {
 //   return {
@@ -30,8 +30,10 @@ class ConnectedHeader extends Component {
     event.preventDefault();
     //reduxWeather state is changed only on submit, not on change
     const reduxWeather = this.state.acceptableWeather;
+    const reduxTemperature = this.state.temperature;
     //by putting reduxWeather in curlies below the payload becomes an object {reduxweather: "sunny"}
     this.props.addWeather({ reduxWeather });
+    this.props.addTemperature({ reduxTemperature });
     //this is the Redux part-- action dispatched
     // this.setState({ acceptableWeather: "sunny" }); (if it's desired to reset local state)
     const reduxTime = this.state.acceptableTravelTime;
@@ -100,7 +102,7 @@ class ConnectedHeader extends Component {
 
 const Header = connect(
   null,
-  { addWeather, sortCities } //this is taking the place of mapdispatchtoprops--connect() automatically puts these action creators into a dispatch function
+  { addWeather, addTemperature, sortCities } //this is taking the place of mapdispatchtoprops--connect() automatically puts these action creators into a dispatch function
 )(ConnectedHeader);
 export default Header;
 

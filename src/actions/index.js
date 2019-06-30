@@ -2,7 +2,8 @@ import {
   ADD_WEATHER,
   SORT_CITIES,
   SELECT_CITY,
-  FETCH_WEATHER_DYNAMICALLY
+  FETCH_WEATHER_DYNAMICALLY,
+  ADD_TEMPERATURE
 } from "../constants/action-types";
 import _ from "lodash";
 import weatherDotGov from "../apis/weatherDotGov";
@@ -14,6 +15,10 @@ import weatherDotGov from "../apis/weatherDotGov";
 
 export const addWeather = (newWeather) => {
   return { type: ADD_WEATHER, payload: newWeather };
+};
+
+export const addTemperature = (newTemperature) => {
+  return { type: ADD_TEMPERATURE, payload: newTemperature };
 };
 
 export const sortCities = (payload) => {
